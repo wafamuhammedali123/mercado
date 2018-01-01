@@ -9,7 +9,7 @@ using mercado.Model;
 
 namespace mercado.Repository
 {
-    public class InventoryRepository : IInventoryRepository
+    public class InventoryRepository
     {
         private string connectionString;
         public InventoryRepository()
@@ -20,12 +20,12 @@ namespace mercado.Repository
         {
             return new SqlConnection(connectionString);
         }
-        public IEnumerable<ShopModel> GetAll()
+        public IEnumerable<InventoryModel> GetAll()
         {
             using (IDbConnection dbConnection = GetConnection())
             {
                 dbConnection.Open();
-                return dbConnection.Query<ShopModel>("SELECT * FROM Shop");
+                return dbConnection.Query<InventoryModel>("SELECT * FROM Inventory");
             }
         }
          public void AddInventory(InventoryModel item)
@@ -62,20 +62,23 @@ namespace mercado.Repository
             }
             
         }
+        
 
-        IEnumerable<InventoryModel> IInventoryRepository.GetAll()
+        public IEnumerable<Product> SearchInventory(string productName)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Add(InventoryModel item)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Update(InventoryModel item)
-        {
-            throw new System.NotImplementedException();
+            try {
+                using (IDbConnection dbConnection = GetConnection())
+                {
+                    string sQuery = @"
+                        SELECT * FROM Inventory i LEFT JOIN Shops s ON(s.ShopId = i.ShopId) WHERE ProductName LIKE '%"+productName+@"%';
+                    ";
+                    dbConnection.Open();
+                    return dbConnection.Query<Product>(sQuery, new {Name = productName});
+                }
+            }
+            catch(Exception e) {
+                return null;
+            }
         }
     }
 }

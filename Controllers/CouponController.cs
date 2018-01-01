@@ -18,6 +18,11 @@ namespace mercado.Controllers
             couponRepository = new CouponRepository();
         }
         
+        //Display all
+        [HttpGet]
+        public IEnumerable<CouponModel> Get() => couponRepository.GetAll();
+
+
 
         // POST api/coupon
         //Insert

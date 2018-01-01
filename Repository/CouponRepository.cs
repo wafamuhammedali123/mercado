@@ -25,7 +25,7 @@ namespace mercado.Repository
             using (IDbConnection dbConnection = GetConnection())
             {
                 dbConnection.Open();
-                return dbConnection.Query<CouponModel>("SELECT * FROM Shop");
+                return dbConnection.Query<CouponModel>("SELECT * FROM Coupon");
             }
         }
          public void Add(CouponModel item)
@@ -62,7 +62,7 @@ namespace mercado.Repository
             }
             
         }
-
+ 
 
     }
 }

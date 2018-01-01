@@ -29,6 +29,12 @@ namespace mercado.Controllers
                 userRepository.Add(user);
         }
 
+        //Display all
+        [HttpGet]
+        public IEnumerable<UserModel> Get() => userRepository.GetAll();
+
+
+
         // PUT api/user/5
         //Update 
         [HttpPut("{id}")]

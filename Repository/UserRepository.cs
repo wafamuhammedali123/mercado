@@ -21,12 +21,12 @@ namespace mercado.Repository
         {
             return new SqlConnection(connectionString);
         }
-        public IEnumerable<ShopModel> GetAll()
+        public IEnumerable<UserModel> GetAll()
         {
             using (IDbConnection dbConnection = GetConnection())
             {
                 dbConnection.Open();
-                return dbConnection.Query<ShopModel>("SELECT * FROM Shop");
+                return dbConnection.Query<UserModel>("SELECT * FROM [User]");
             }
         }
         public void Add(UserModel item)

@@ -17,6 +17,11 @@ namespace mercado.Controllers
             inventoryRepository = new InventoryRepository();
         }
         
+        //Display all
+        [HttpGet]
+        public IEnumerable<InventoryModel> Get() => inventoryRepository.GetAll();
+
+
 
         // POST api/inventory
         //Insert
@@ -35,6 +40,12 @@ namespace mercado.Controllers
             inventory.InventoryId = id;
             if (ModelState.IsValid)
                 inventoryRepository.UpdateInventory(inventory);
+        }
+
+        [HttpGet("search/{search}")]
+        public IEnumerable<Product> Search(string search)
+        {
+            return inventoryRepository.SearchInventory(search);
         }
 
        

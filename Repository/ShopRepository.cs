@@ -25,7 +25,7 @@ namespace mercado.Repository
             using (IDbConnection dbConnection = GetConnection())
             {
                 dbConnection.Open();
-                return dbConnection.Query<ShopModel>("SELECT * FROM Shop");
+                return dbConnection.Query<ShopModel>("SELECT * FROM Shops");
             }
         }
         public void Add(ShopModel item)

@@ -17,6 +17,12 @@ namespace mercado.Controllers
         {
             shopRepository = new ShopRepository();
         }
+
+        //Display all
+        [HttpGet]
+        public IEnumerable<ShopModel> Get() => shopRepository.GetAll();
+
+
         
 
         // POST api/shop
